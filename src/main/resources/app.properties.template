@@ -1,0 +1,5 @@
+name=${project.name}
+version=${project.version}
+app.id=
+app.hash=
+testmode=true

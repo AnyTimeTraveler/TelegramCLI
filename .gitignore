@@ -1,0 +1,21 @@
+# Java
+*.class
+
+# Log
+*.log
+
+# Package files
+*.jar
+
+# IntelliJ
+.idea/
+*.iws
+*.iml
+
+# Build output
+/out/
+/build/
+/target/
+
+# User settings
+/src/main/resources/app.properties

@@ -23,6 +23,27 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>java.library.path</key>
+                            <value>${project.basedir}/lib/</value>
+                        </systemProperty>
+                    </systemProperties>
+                    <mainClass>org.simonscode.tgcli.Main</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
@@ -30,6 +51,8 @@
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <mainClass>org.simonscode.tgcli.Main</mainClass>
+                            <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>
                 </configuration>

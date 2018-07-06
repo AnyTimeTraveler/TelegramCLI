@@ -16,6 +16,7 @@
 /out/
 /build/
 /target/
+/lib/libtdjni.so
 
 # User settings
 /src/main/resources/app.properties

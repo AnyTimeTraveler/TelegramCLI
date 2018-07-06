@@ -6,8 +6,8 @@
  */
 package org.simonscode.tgcli.telegram;
 
+import org.drinkless.tdlib.Client;
 import org.drinkless.tdlib.TdApi;
-import org.drinkless.tdlib.TdClient;
 
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -25,10 +25,10 @@ public final class MessageHandler {
     private final ConcurrentMap<Integer, TdApi.BasicGroupFullInfo> basicGroupsFullInfo = new ConcurrentHashMap<>();
     private final ConcurrentMap<Integer, TdApi.SupergroupFullInfo> supergroupsFullInfo = new ConcurrentHashMap<>();
     public TdApi.AuthorizationState authorizationState = null;
-    private TdClient nativeClient;
+    private Client nativeClient;
     private boolean haveFullChatList = false;
 
-    MessageHandler(TdClient nativeClient) {
+    MessageHandler(Client nativeClient) {
         this.nativeClient = nativeClient;
     }
 

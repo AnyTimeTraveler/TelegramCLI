@@ -7,8 +7,8 @@
 
 package org.simonscode.tgcli.telegram;
 
+import org.drinkless.tdlib.Client;
 import org.drinkless.tdlib.TdApi;
-import org.drinkless.tdlib.TdClient;
 import org.simonscode.tgcli.Settings;
 import org.simonscode.tgcli.state.GlobalStateHolder;
 
@@ -16,9 +16,9 @@ import static org.simonscode.tgcli.state.ApplicationState.*;
 
 public class AuthHandler {
 
-    private final TdClient nativeClient;
+    private final Client nativeClient;
 
-    public AuthHandler(TdClient nativeClient) {
+    public AuthHandler(Client nativeClient) {
         this.nativeClient = nativeClient;
     }
 

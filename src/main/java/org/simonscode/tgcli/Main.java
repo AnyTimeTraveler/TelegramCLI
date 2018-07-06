@@ -16,19 +16,20 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        System.loadLibrary("tdjni");
-        // disable TDLib log
-        Log.setVerbosityLevel(0);
-        if (!Log.setFilePath("tdlib.log")) {
-            throw new IOError(new IOException("Write access to the current directory is required"));
+    public static void main(String[] args) {
+        try {
+            System.loadLibrary("tdjni");
+            // disable TDLib log
+            Log.setVerbosityLevel(0);
+            if (!Log.setFilePath("tdlib.log")) {
+                throw new IOError(new IOException("Write access to the current directory is required"));
+            }
+
+            TelegramClient telegramClient = new TelegramClient();
+            GUIController guiController = new GUIController(telegramClient);
+            guiController.run();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        TelegramClient telegramClient = new TelegramClient();
-
-        GUIController guiController = new GUIController(telegramClient);
-        Thread guiControllerThread = new Thread(guiController);
-        guiControllerThread.setDaemon(true);
-        guiControllerThread.start();
     }
 }

@@ -7,17 +7,17 @@
 
 package org.simonscode.tgcli.telegram;
 
+import org.drinkless.tdlib.Client;
 import org.drinkless.tdlib.TdApi;
-import org.drinkless.tdlib.TdClient;
 
-public class TelegramClient implements TdClient.ExceptionHandler, TdClient.ResultHandler {
+public class TelegramClient implements Client.ExceptionHandler, Client.ResultHandler {
 
-    private final TdClient nativeClient;
+    private final Client nativeClient;
     private final AuthHandler authHandler;
     private final MessageHandler messageHandler;
 
     public TelegramClient() {
-        nativeClient = TdClient.create(this, this, this);
+        nativeClient = Client.create(this, this, this);
         authHandler = new AuthHandler(nativeClient);
         messageHandler = new MessageHandler(nativeClient);
     }

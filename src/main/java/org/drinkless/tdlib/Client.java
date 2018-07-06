@@ -1,8 +1,9 @@
-//
-// Copyright Aliaksei Levin (levlam@telegram.org), Arseny Smirnov (arseny30@gmail.com) 2014-2018
-//
-// Distributed under the Boost Software License, Version 1.0. (See http://www.boost.org/LICENSE_1_0.txt)
-//
+/*
+ * Copyright Simon Struck (tgcli@simonscode.org) 2018
+ *
+ * Distributed under the MIT License (See the file LICENSE.txt)
+ *
+ */
 package org.drinkless.tdlib;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +15,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * Main class for interaction with the TDLib.
  */
-public final class TdClient implements Runnable {
+public final class Client implements Runnable {
     private static final int MAX_EVENTS = 1000;
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     private final Lock readLock = readWriteLock.readLock();
@@ -28,7 +29,7 @@ public final class TdClient implements Runnable {
     private volatile boolean isClientDestroyed = false;
     private volatile ExceptionHandler defaultExceptionHandler = null;
 
-    private TdClient(ResultHandler updatesHandler, ExceptionHandler updateExceptionHandler, ExceptionHandler defaultExceptionHandler) {
+    private Client(ResultHandler updatesHandler, ExceptionHandler updateExceptionHandler, ExceptionHandler defaultExceptionHandler) {
         nativeClientId = createNativeClient();
         handlers.put(0L, new Handler(updatesHandler, updateExceptionHandler));
         this.defaultExceptionHandler = defaultExceptionHandler;
@@ -60,8 +61,8 @@ public final class TdClient implements Runnable {
      * @param defaultExceptionHandler Default handler for exceptions thrown from all ResultHandler. If it is null, exceptions will be iggnored.
      * @return created TdClient
      */
-    public static TdClient create(ResultHandler updatesHandler, ExceptionHandler updatesExceptionHandler, ExceptionHandler defaultExceptionHandler) {
-        TdClient client = new TdClient(updatesHandler, updatesExceptionHandler, defaultExceptionHandler);
+    public static Client create(ResultHandler updatesHandler, ExceptionHandler updatesExceptionHandler, ExceptionHandler defaultExceptionHandler) {
+        Client client = new Client(updatesHandler, updatesExceptionHandler, defaultExceptionHandler);
         Thread tdLib_thread = new Thread(client, "TDLib thread");
         tdLib_thread.setDaemon(true);
         tdLib_thread.start();
@@ -161,7 +162,7 @@ public final class TdClient implements Runnable {
      *
      * @param defaultExceptionHandler Default exception handler. If null Exceptions are ignored.
      */
-    public void setDefaultExceptionHandler(TdClient.ExceptionHandler defaultExceptionHandler) {
+    public void setDefaultExceptionHandler(Client.ExceptionHandler defaultExceptionHandler) {
         this.defaultExceptionHandler = defaultExceptionHandler;
     }
 
